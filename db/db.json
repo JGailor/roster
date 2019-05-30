@@ -1,0 +1,58 @@
+{
+    "abilities": [
+        {"id": 1, "name": "Death to the False Emperor", "desc": ""},
+        {"id": 2, "name": "Disgustingly Resilient", "desc": ""},
+        {"id": 3, "name": "Icon of Despair", "desc": ""},
+        {"id": 4, "name": "Vectors of Death and Disease", "desc": ""}
+    ],
+    "faction_keywords": [
+        {"id": 1, "name": "Chaos"},
+        {"id": 2, "name": "Nurgle"},
+        {"id": 3, "name": "Heretic Astartes"},
+        {"id": 4, "name": "Death Guard"}
+    ],
+    "keywords": [
+        {"id": 1, "name": "Infantry"},
+        {"id": 2, "name": "Plague Marines"}
+    ],
+    "weapon_types": [
+        {"id": 1, "name": "Assault"},
+        {"id": 2, "name": "Pistol"},
+        {"id": 3, "name": "Rapid Fire"},
+        {"id": 4, "name": "Heavy"},
+        {"id": 5, "name": "Melee"},
+        {"id": 6, "name": "Grenade"}
+    ],
+    "weapon_abilities": [
+        {"id": 1, "name": "Plague Weapon", "desc": "Re-roll wounds rolls of 1.", "rr_wounds_one": true},
+        {"id": 2, "name": "Melta Weapon", "desc": "If the target is within half range of this weapon, roll two dice when inflicting damage with it and discard the lowest result."},
+        {"id": 3, "name": "Automatic Hits", "desc": "This weapon automatically hits its target.", "auto_hit": true}
+    ],
+    "weapons": [
+        {"id": 1, "name": "Blight Launcher", "range": 24, "type": 1, "hit_value": 2, "s": 6, "ap": -2, "d": 1, "d_die": 3, "abilities": [1]},
+        {"id": 2, "name": "Bolt Pistol", "range": 12, "type": 2, "hit_value": 1, "s": 4, "ap": 0, "d": 1, "abilities": []},
+        {"id": 3, "name": "Bolt Gun", "range": 24, "type": 3, "hit_value": 1, "s": 4, "ap": 0, "d": 1, "abilities": []},
+        {"id": 4, "name": "Melta Gun", "range": 12, "type": 1, "hit_value": 1, "s": 8, "ap": -4, "d": 1, "d_die": 6, "abilities": [2]},
+        {"id": 5, "name": "Plague Belcher", "range": 9, "type": 1, "hit_value": 1, "hit_die": 6, "s": 4, "ap": 0, "d": 1, "abilities": [1, 3]},
+        {"id": 6, "name": "Plague Spewer", "range": 9, "type": 4, "hit_value": 1, "hit_die": 6, "s": 5, "ap": -1, "d": 1, "abilities": [1, 3]}
+    ],
+    "models": {
+        "plague_marine": {
+            "designation": "Plague Marine",
+            "stats": {
+                "m": 5,
+                "ws": 3,
+                "bs": 3,
+                "s": 4,
+                "t": 5,
+                "w": 1,
+                "a": 1,
+                "ld": 7,
+                "sv": 3
+            },
+            "abilities": [1, 2, 3, 4],
+            "faction_keywords": [1, 2, 3, 4],
+            "keywords": [1, 2]
+        }
+    }
+}
