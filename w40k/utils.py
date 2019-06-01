@@ -1,5 +1,5 @@
 import json
-from w40k import Weapon, Model
+from models import Weapon, Model
 
 def weapon_wound_roll_target(weapon: Weapon, target: Model) -> float:
     if weapon.s > (2 * target.t):

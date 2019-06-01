@@ -1,8 +1,8 @@
-from dataclasses import dataclass
 from __future__ import annotations
+from dataclasses import dataclass
 from typing import List
 from math import floor
-from w40k_utils import weapon_wound_roll_target
+from utils import weapon_wound_roll_target
 from enum import Enum
 
 class DiceAverage(Enum):
