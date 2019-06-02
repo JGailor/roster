@@ -96,6 +96,19 @@ class BattlescribeCatFile:
             })
         return sses
 
+    @property
+    def shared_selection_entry_groups(self):
+        selector = "./cs:sharedSelectioEntryGroups/cs:selectionEntryGroup"
+        selection_entry_groups = self._findall(selector)
+        return map(self._selection_entry_group, selection_entry_groups)
+
+    @property
+    def shared_profiles(self):
+        sps = []
+        for p in self._findall("./cs:sharedProfiles/cs:profile"):
+            sps.append(self._sp_profile(p))
+        return sps
+
     def _findall(self, selector:str, root=None):
         return (root or self.root).findall(selector, ns_map)
 
@@ -214,3 +227,88 @@ class BattlescribeCatFile:
                 "value": self._float(c.get("value"))
             })
         return cs
+
+    def _selection_entry_group(self, root):
+        constraints = self._findall("./cs:constraints/cs:constraint", root)
+        sub_segs = self._findall("./cs:selectionEntryGroups/cs:selectionEntryGroup", root)
+        entry_links = self._findall("./cs:entryLinks/cs:entryLink", root)
+        modifiers = self._findall("./cs:modifiers/cs:modifier", root)
+        return {
+            "id": root.get("id"),
+            "name": root.get("name"),
+            "hidden": self._bool(root.get("hidden")),
+            "collective": self._bool(root.get("collective")),
+            "default_selection_entry_id": root.get("defaultSelectionEntryId"),
+            "constraints": list(map(self._seg_constraint, constraints)),
+            "selection_entry_groups": list(map(self._selection_entry_group, sub_segs)),
+            "entry_links": list(map(self._seg_entry_link, entry_links)),
+            "modifiers": list(map(self._seg_modifier, modifiers))
+        }
+
+    def _seg_constraint(self, root):
+        return {
+            "id": root.get("id"),
+            "field": root.get("field"),
+            "scope": root.get("scope"),
+            "value": root.get("value"),
+            "percent_value": self._bool(root.get("percentValue")),
+            "shared": self._bool(root.get("shared")),
+            "include_child_selections": self._bool(root.get("includeChildSelections")),
+            "include_child_forces": self._bool(root.get("includeChildForces")),
+            "type": root.get("type")
+        }
+
+    def _seg_entry_link(self, root):
+        modifiers = self._findall("./cs:modifiers/cs:modifier", root)
+        return {
+            "id": root.get("id"),
+            "name": root.get("name"),
+            "hidden": self._bool(root.get("hidden")),
+            "collective": self._bool(root.get("collective")),
+            "target_id": root.get("targetId"),
+            "type": root.get("type"),
+            "modifiers": list(map(self._seg_modifier, modifiers))
+        }
+
+    def _seg_modifier(self, root):
+        conditions = self._findall("./cs:conditions/cs:condition", root)
+        return {
+            "type": root.get("type"),
+            "field": root.get("field"),
+            "value": root.get("value"),
+            "conditions": list(map(self._seg_el_m_condition, conditions))
+        }
+
+    def _seg_el_m_condition(self, root):
+        return {
+            "field": root.get("field"),
+            "scope": root.get("scope"),
+            "value": root.get("value"),
+            "percent_value": self._bool(root.get("percentValue")),
+            "shared": self._bool(root.get("shared")),
+            "include_child_selections": self._bool(root.get("includeChildSelections")),
+            "include_child_forces": self._bool(root.get("includeChildForces")),
+            "child_id": root.get("childId"),
+            "type": root.get("type")
+        }
+
+    def _sp_profile(self, root):
+        return {
+            "id": root.get("id"),
+            "name": root.get("name"),
+            "hidden": self._bool(root.get("hidden")),
+            "type_id": root.get("typeId"),
+            "type_name": root.get("typeName"),
+            "characteristics": self._sp_p_characterists(root)
+        }
+
+    def _sp_p_charactistics(self, root):
+        return map(self._sp_p_charactistic, self._findall("./cs:characteristics/cs:characteristic"))
+    
+    def _sp_p_characteristic(self, root):
+        return {
+            "name": root.get("name"),
+            "type_id": root.get("typeId"),
+        }
+
+        
