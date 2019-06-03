@@ -299,11 +299,11 @@ class BattlescribeCatFile:
             "hidden": self._bool(root.get("hidden")),
             "type_id": root.get("typeId"),
             "type_name": root.get("typeName"),
-            "characteristics": self._sp_p_characterists(root)
+            "characteristics": self._sp_p_characteristics(root)
         }
 
-    def _sp_p_charactistics(self, root):
-        return map(self._sp_p_charactistic, self._findall("./cs:characteristics/cs:characteristic"))
+    def _sp_p_characteristics(self, root):
+        return map(self._sp_p_characteristic, self._findall("./cs:characteristics/cs:characteristic"))
     
     def _sp_p_characteristic(self, root):
         return {
