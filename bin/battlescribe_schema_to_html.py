@@ -18,13 +18,19 @@ parser.setContentHandler(handler)
 with open(sys.argv[1]) as f:
     parser.parse(sys.argv[1])
 
-html = "<html><head><title>Battlescribe .cat Schema</title><style>.element-line:nth-child(even) {background: #CCC;}</style></head><body>"
+html = "<html><head><title>Battlescribe .cat Schema</title><style>"
+html += ".element-line:nth-child(even) {background: #CCC;}"
+html += ".element {color: #FF851B; font-weight: bold;}"
+html += ".attr-open-paren {margin-left: 10px;}"
+html += ".attr.first {margin-left: 0px;}"
+html += ".attr {margin-left: 5px; color: #001f3f; font-style: italic;}"
+html += "</style></head><body>"
 
 def render_node(name, attrs, children, indent):
-    html = f"<div class=\"element-line\" style=\"margin-left: {indent * 10}px;padding: 5px;\"><span>{name}</span>"
-    html += "<span>(</span>"
+    html = f"<div class=\"element-line\" style=\"margin-left: {indent * 10}px;padding: 5px;\"><span class=\"element\">{name}</span>"
+    html += "<span class=\"attr-open-paren\">(</span>"
     if len(attrs) > 0:
-        html += "<span style=\"font-style:italic;\">" + "</span>, <span style=\"font-style:italic;\">".join(sorted(attrs)) + "</span>"
+        html += "<span class=\"attr first\">" + "</span>, <span class=\"attr\">".join(sorted(attrs)) + "</span>"
     html += "<span>)</span></div>"
     for name, node in children.items():
         html += render_node(name, node["attrs"], node["children"], indent + 1)
