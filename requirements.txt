@@ -1,1 +1,2 @@
-ptpython
+ptpython==2.0.4
+flask==1.0.3
