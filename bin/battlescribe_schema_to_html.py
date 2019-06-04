@@ -1,7 +1,6 @@
 #!/bin/env python
 import sys
 import os
-import xml.sax
 
 # Append the higher-level directory
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
@@ -12,11 +11,7 @@ if len(sys.argv) < 2:
     print("usage: python bin/dump_battlescribe_schema.py <battlescribe-filename> [outputformat (json, html)]")
     sys.exit(-1)
 
-handler = BattlescribeCatSchema()
-parser = xml.sax.make_parser()
-parser.setContentHandler(handler)
-with open(sys.argv[1]) as f:
-    parser.parse(sys.argv[1])
+schema = BattlescribeCatSchema.parse(sys.argv[1])
 
 html = "<html><head><title>Battlescribe .cat Schema</title><style>"
 html += ".element-line:nth-child(even) {background: #CCC;}"
@@ -36,7 +31,7 @@ def render_node(name, attrs, children, indent):
         html += render_node(name, node["attrs"], node["children"], indent + 1)
     return html
 
-for name, node in handler.tree["children"].items():
+for name, node in schema.tree["children"].items():
     html += render_node(name, node["attrs"], node["children"], 0)
 
 print(html)

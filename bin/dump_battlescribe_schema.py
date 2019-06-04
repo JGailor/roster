@@ -16,9 +16,6 @@ if len(sys.argv) != 2:
     print("usage: python bin/dump_battlescribe_schema.py <battlescribe-filename>")
     sys.exit(-1)
 
-handler = BattlescribeCatSchema()
-parser = xml.sax.make_parser()
-parser.setContentHandler(handler)
-parser.parse(open(sys.argv[1]))
+schema = BattlescribeCatSchema.parse(sys.argv[1])
 
-print(json.dumps(handler.schema_tree))
+print(json.dumps(schema.schema_tree))
