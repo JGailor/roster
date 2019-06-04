@@ -19,9 +19,9 @@ class TreeNode extends React.Component {
   attributes_list() {
     let attrs = [];
     for (let i = 0; i < this.props.attributes.length; i++) {
-      attrs.push(<span className="attr" style={{color: "#0074D9", fontStyle: 'italic'}}>{this.props.attributes[i]}</span>);
+      attrs.push(<span key={i} className="attr" style={{color: "#0074D9", fontStyle: 'italic'}}>{this.props.attributes[i]}</span>);
       if (i < this.props.attributes.length - 1) {
-        attrs.push(<span className="attr-sep">, </span>);
+        attrs.push(<span key={"attr_sep_" + i} className="attr-sep">, </span>);
       }
     }
 
