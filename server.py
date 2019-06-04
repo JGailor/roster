@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify
 from w40k.battlescribe.schema import BattlescribeCatSchema
 
-app = Flask(__name__, static_folder="react-app/build/static", template_folder="react-app/build")
+app = Flask(__name__, static_folder="web/react-app/build/static", template_folder="web/react-app/build")
 
 @app.route("/")
 def hello():
