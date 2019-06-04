@@ -18,6 +18,8 @@ These are all subject to change based on what I'm trying to accomplish.  Everyth
 - React (https://reactjs.org/)
 - Fetch (https://github.com/github/fetch)
 - React-FontAwesome (https://github.com/FortAwesome/react-fontawesome)
+- Bootstrap (https://getbootstrap.com/)
+- React-Bootstrap (https://react-bootstrap.netlify.com/)
 
 ## Other Useful Miscellaneous Links
 - create-react-app with a server (https://github.com/fullstackreact/food-lookup-demo#deploying)

@@ -31,3 +31,12 @@
     transform: rotate(360deg);
   }
 }
+
+#root .navbar .navbar-nav .nav-link {
+  color: #2F3035;
+}
+
+#root .navbar .navbar-nav .nav-link.active {
+  font-weight: bold;
+  color: #fff;
+}
