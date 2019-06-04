@@ -58,14 +58,21 @@ class BattlescribeSchemaTree extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            schema: null
+            schema: null,
+            load_error: false
         }
+    }
+
+    handleLoadError(ex) {
+        console.log("error loading data: ", ex);
+        this.setState({load_error: true});
     }
 
     componentDidMount() {
         fetch("/api/battlescribe/w40k_8th/schema.json")
             .then((r) => r.json())
             .then(data => this.setState({schema: data}))
+            .catch((ex) => this.handleLoadError(ex));
     }
 
     render() {
@@ -74,7 +81,11 @@ class BattlescribeSchemaTree extends React.Component {
         if (this.state.schema) {
             tree = <TreeNode name={this.state.schema.name} attributes={this.state.schema.attributes.sort()} children={this.state.schema.children} indent={0}/>
         } else {
-            tree = <p>Loading...</p>
+            if (this.state.load_error) {
+                tree = <p>There was a problem loading the data... please try again</p>;
+            } else {
+                tree = <p>Loading...</p>;
+            }
         }
 
         return (
