@@ -2,6 +2,15 @@ import xml.sax
 import json
 
 class BattlescribeCatSchema(xml.sax.ContentHandler):
+    @staticmethod
+    def parse(fname):
+        handler = BattlescribeCatSchema()
+        parser = xml.sax.make_parser()
+        parser.setContentHandler(handler)
+        with open(fname) as f:
+            parser.parse(f)
+        return handler
+
     def __init__(self):
         self.tree = {"attrs": [], "children": {}}
         self.stack = []
@@ -36,3 +45,15 @@ class BattlescribeCatSchema(xml.sax.ContentHandler):
 
     def print(self):
         json.dumps(self.tree)
+
+    def jsonable(self):
+        def _jsonable(name, node):
+            return {
+                "name": name,
+                "attributes": node["attrs"],
+                "children": list(map(lambda name: _jsonable(name, node["children"][name]), node["children"].keys()))
+            }
+        root_key = list(self.tree["children"].keys())[0]
+        return _jsonable(root_key, self.tree["children"][root_key])
+        
+        
