@@ -25,3 +25,4 @@ These are all subject to change based on what I'm trying to accomplish.  Everyth
 - getting started with React (https://reactjs.org/docs/getting-started.html)
 - React from scratch (https://blog.usejournal.com/react-from-scratch-8acf7a1b00a4)
 - nice color palette for the web (https://clrs.cc/)
+- running flask and react apps together (https://medium.com/@pranayaryal/how-to-run-flask-and-react-together-6e7c773b54d)
