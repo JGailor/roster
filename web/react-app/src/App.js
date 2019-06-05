@@ -1,33 +1,44 @@
 import React from 'react';
-import { BrowserRouter as BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import {BattlescribeSchemaTree} from './BattlescribeSchemaTree';
-import {Navbar} from "./Navbar";
+import {RosterNavbar} from "./RosterNavbar";
+import {KillTeamMathHammer} from "./kill_team/MathHammer";
 import './App.css';
 
-function Index() {
+function IndexView() {
   return (
     <div>
-        <Navbar />
+        <RosterNavbar />
         <p>Welcome to Roster!</p>
         <p><Link to="/battlescribe/schema">Battlescribe Cat Schema Explorer</Link></p>
     </div>
   )
 }
 
-function BattlescribeCatSchemaExplorer() {
+function BattlescribeCatSchemaView() {
   return (
     <div>
-      <Navbar/>
+      <RosterNavbar/>
       <BattlescribeSchemaTree/>
     </div>)
+}
+
+function KillTeamMathHammerView() {
+  return (
+    <div>
+      <RosterNavbar/>
+      <KillTeamMathHammer/>
+    </div>
+  )
 }
 
 class Roster extends React.Component {
   render() {
     return(
       <BrowserRouter>
-        <Route exact path="/" component={Index}/>
-        <Route exact path="/battlescribe/schema" component={BattlescribeCatSchemaExplorer}/>
+        <Route exact path="/" component={IndexView}/>
+        <Route exact path="/battlescribe/schema" component={BattlescribeCatSchemaView}/>
+        <Route exact path="/kt/mh" component={KillTeamMathHammerView}/>
       </BrowserRouter>
     );
   }
